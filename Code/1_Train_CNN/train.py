@@ -18,7 +18,6 @@ import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 import torchvision
-import transforms_3pair.transforms_3pair as transforms_3pair    # customizd transform for applying same random for 3 images (image, mask, edge)
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 
@@ -31,7 +30,6 @@ from data_loader import *
 from model import *
 from utilizes import *
 
-
 '''Set up Training Parameters'''
 parser = argparse.ArgumentParser(description='Pytorch: 3D CNN for Classification')
 
@@ -40,20 +38,21 @@ parser.add_argument('--model', default='resnet',
                     help='model name: (resnet | preresnet | wideresnet | resnext | densenet)')
 parser.add_argument('--model_depth', default=18, type=int,
                     help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
+parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-18-kinetics.pth', type=str,
+                    help='Pretrained model (.pth)')
+
 parser.add_argument('--resnet_shortcut', default='B', type=str,
                     help='Shortcut type of resnet (A | B)')
-parser.add_argument('--wide_resnet_k', default=2, type=int, 
+parser.add_argument('--wide_resnet_k', default=2, type=int,
                     help='Wide resnet k')
 parser.add_argument('--resnext_cardinality', default=32, type=int,
                     help='ResNeXt cardinality')
-parser.add_argument('--pretrain_path', default='', type=str, 
-                    help='Pretrained model (.pth)')
 
 parser.add_argument('--n_classes', default=3, type=int,
                     help='Number of classes output')
 parser.add_argument('--sample_size', default=112, type=int,
                     help='Height and width of inputs')
-parser.add_argument('--sample_duration', default=16, type=int, 
+parser.add_argument('--sample_duration', default=16, type=int,
                     help='Distance on z-axis of inputs')
 
 # Model training setting
@@ -82,7 +81,7 @@ parser.add_argument('--n_scales', default=5, type=int,
 parser.add_argument('--scale_step', default=0.84089641525, type=float,
                     help='Scale step for multiscale cropping')
 parser.add_argument('--train_crop', default='corner', type=str,
-                    help= 'Spatial cropping method in training. random is uniform. corner is selection from 4 corners and 1 center.  (random | corner | center)')
+                    help='Spatial cropping method in training. random is uniform. corner is selection from 4 corners and 1 center.  (random | corner | center)')
 
 # Training display setting
 parser.add_argument('--pf', default=1, type=int, metavar='N',
@@ -93,7 +92,7 @@ parser.add_argument('--ef', default=1, type=int, metavar='N',
                     help='evaluate print frequency (default: 2)')
 
 '''Set up Data Directory'''
-parser.add_argument('--image_data_dir', default='../../Data/3Ddata/image', type=str, metavar='PATH',
+parser.add_argument('--vol_data_dir', default='../../Data/3Ddata/image', type=str, metavar='PATH',
                     help='path to image data')
 parser.add_argument('--train_list_dir', default='../../Data/3Ddata/dir/train_list.txt', type=str, metavar='PATH',
                     help='path to train data list txt file')
@@ -108,7 +107,7 @@ def main():
     args = parser.parse_args()
 
     ''' Initialize and load model (models: Dual Densenet structure) '''
-    model, parameters = generate_model(args, pretrain=True)
+    model = generate_model(args, PreTrain=True)
     print(model)
 
     model.cuda()
@@ -141,18 +140,16 @@ def main():
     2) Validation Data
     '''
     # 1) training data
-    train_dataset = CTTumorDataset_FreeSeg(image_data_dir=args.image_data_dir,
-                                     mask_data_dir=args.mask_data_dir,
-                                     list_file=args.train_list_dir,
-                                     transform=None)
+    train_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
+                                           list_file=args.train_list_dir,
+                                           transform=None)
     train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
                               shuffle=True, num_workers=args.workers, pin_memory=True)
 
     # 2) validation data
-    val_dataset = CTTumorDataset_FreeSeg(image_data_dir=args.image_data_dir,
-                                   mask_data_dir=args.mask_data_dir,
-                                   list_file=args.test_list_dir,
-                                   transform=None)
+    val_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
+                                         list_file=args.test_list_dir,
+                                         transform=None)
     val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size,
                             shuffle=False, num_workers=args.workers, pin_memory=True)
 
@@ -165,7 +162,7 @@ def main():
 
         # train for one epoch
         train(train_loader, model, criterion, optimizer, epoch, data_logger=data_logger)
-        
+
         # evaluate on validation set
         if epoch % args.ef == 0 or epoch == args.epochs:
             m = validate(val_loader, model, criterion, epoch, data_logger=data_logger)
@@ -216,25 +213,6 @@ def train(train_loader, model, criterion, optimizer, epoch, data_logger=None):
         # Plot the training loss
         data_logger.scalar_summary(tag='train/loss', value=loss, step=i + len(train_loader) * epoch)
 
-        # Plot the classification results
-        if epoch % args.df == 0:
-            image_disp = np.repeat(input_img_var.data.cpu().numpy()[0, 0, :, :][np.newaxis, np.newaxis, :, :], 3, axis=1)
-            image_mid_disp = np.repeat(input_cond_var.data.cpu().numpy()[0, 0, :, :][np.newaxis, np.newaxis, :, :], 3, axis=1)
-            dist_mid_disp = np.repeat(input_cond_var.data.cpu().numpy()[0, 1, :, :][np.newaxis, np.newaxis, :, :], 3, axis=1)
-            mask_mid_disp = np.repeat(input_cond_var.data.cpu().numpy()[0, 2, :, :][np.newaxis, np.newaxis, :, :], 3, axis=1)
-            
-            tag_inf = '_epoch:' + str(epoch) + ' _iter:' + str(i)
-            data_logger.image_summary(tag='train/' + tag_inf + '-0image' + 
-            						  '__gt:' + str(class_vec_var.data.cpu().numpy()[0][0]) + 
-            						  '___pred:' + str(output.data.cpu().numpy()[0][0]),
-                                      images=image_disp, step=i + len(train_loader) * epoch)
-            data_logger.image_summary(tag='train/' + tag_inf + '-1image_mid',
-                                      images=image_mid_disp, step=i + len(train_loader) * epoch)
-            data_logger.image_summary(tag='train/' + tag_inf + '-2dist_mid',
-                                      images=dist_mid_disp, step=i + len(train_loader) * epoch)
-            data_logger.image_summary(tag='train/' + tag_inf + '-3mask_mid',
-                                      images=mask_mid_disp, step=i + len(train_loader) * epoch)
-
 
 def validate(val_loader, model, criterion, epoch, data_logger=None):
     losses = AverageMeter()
@@ -254,17 +232,6 @@ def validate(val_loader, model, criterion, epoch, data_logger=None):
 
         # 3) record loss
         losses.update(loss.data[0], input_vol.size(0))
-
-        # 4) Plot the classification results
-        if epoch % args.df == 0:
-            image_disp = np.repeat(input_img_var.data.cpu().numpy()[0, 0, :, :][np.newaxis, np.newaxis, :, :], 3,
-                                   axis=1)
-
-            tag_inf = '_epoch:' + str(epoch) + ' _iter:' + str(i)
-            data_logger.image_summary(tag='train/' + tag_inf + '-0image' + 
-            						  '__gt:' + str(class_vec_var.data.cpu().numpy()[0][0]) + 
-            						  '___pred:' + str(output.data.cpu().numpy()[0][0]),
-                                      images=image_disp, step=i + len(val_loader) * epoch)
 
         # 5) store all the output, case_ind, gt on validation
         if i == 0:

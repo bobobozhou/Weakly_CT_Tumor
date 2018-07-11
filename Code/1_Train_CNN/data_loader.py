@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 from torch.utils.data import Dataset
-import transforms_3pair.transforms_3pair as transforms_3pair    # customizd transform for applying same random for 3 images (image, mask, edge)
 import torchvision.transforms as transforms
 from PIL import Image
 from scipy import ndimage
@@ -31,8 +30,8 @@ class CTTumorDataset_FreeSeg(Dataset):
                 items = line.split()
 
                 vol_name = items[0]
-                vol_name = os.path.join(image_data_dir, vol_name)
-                vol_names.append(image_name)
+                vol_name = os.path.join(vol_data_dir, vol_name)
+                vol_names.append(vol_name)
 
                 class_vec = items[1:]
                 class_vec = [int(i) for i in class_vec]

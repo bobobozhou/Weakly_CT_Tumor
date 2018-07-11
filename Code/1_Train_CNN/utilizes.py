@@ -6,6 +6,7 @@ from pydensecrf.utils import unary_from_softmax, create_pairwise_bilateral, crea
 from sklearn.metrics import roc_auc_score, average_precision_score
 import ipdb
 
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
     def __init__(self):
