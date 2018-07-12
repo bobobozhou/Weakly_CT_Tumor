@@ -1,9 +1,10 @@
 import torch
 import numpy as np
 from torch.utils.data import Dataset
-import torchvision.transforms as transforms
+import transforms_3D.transforms_3d as transforms_3d
 from PIL import Image
 from scipy import ndimage
+from scipy.io import loadmat
 import os
 import ipdb
 
@@ -54,18 +55,16 @@ class CTTumorDataset_FreeSeg(Dataset):
 
         # image loader
         vol_name = self.vol_names[index]
-        vol = Image.open(vol_name).convert('I')
-        vol = vol.numpy()
+        vol = np.array(loadmat(vol_name)['vol_patch_tumor'], dtype=float)
+        vol = np.transpose(vol, (2, 0, 1))
+        vol = torch.from_numpy(vol).float()
+
+        if self.transform is not None:
+            vol = self.transform(vol)
 
         # class vector loader
         class_vec = self.class_vecs[index]
         class_vec = torch.FloatTensor(class_vec)
-
-        if self.transform is not None:
-            vol = self.transform(vol)
-            
-        vol = np.repeat(vol, 3, axis=0)
-        vol = torch.from_numpy(vol).float();
         
         return vol, class_vec
 

@@ -18,7 +18,7 @@ import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 import torchvision
-import torchvision.transforms as transforms
+import transforms_3D.transforms_3d as transforms_3d
 from torch.utils.data import DataLoader
 
 import numpy as np
@@ -36,9 +36,9 @@ parser = argparse.ArgumentParser(description='Pytorch: 3D CNN for Classification
 # Model structure setting
 parser.add_argument('--model', default='resnet',
                     help='model name: (resnet | preresnet | wideresnet | resnext | densenet)')
-parser.add_argument('--model_depth', default=18, type=int,
+parser.add_argument('--model_depth', default=34, type=int,
                     help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
-parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-18-kinetics.pth', type=str,
+parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-34-kinetics.pth', type=str,
                     help='Pretrained model (.pth)')
 
 parser.add_argument('--resnet_shortcut', default='B', type=str,
@@ -62,7 +62,7 @@ parser.add_argument('--epochs', default=1000000, type=int, metavar='N',
                     help='number of epochs for training network')
 parser.add_argument('--start_epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
-parser.add_argument('--batch_size', default=24, type=int, metavar='N',
+parser.add_argument('--batch_size', default=2, type=int, metavar='N',
                     help='mini-batch size for training (default: 64)')
 parser.add_argument('--lr', default=0.0001, type=float, metavar='LR',
                     help='initial learning rate')
@@ -92,11 +92,11 @@ parser.add_argument('--ef', default=1, type=int, metavar='N',
                     help='evaluate print frequency (default: 2)')
 
 '''Set up Data Directory'''
-parser.add_argument('--vol_data_dir', default='../../Data/3Ddata/image', type=str, metavar='PATH',
-                    help='path to image data')
-parser.add_argument('--train_list_dir', default='../../Data/3Ddata/dir/train_list.txt', type=str, metavar='PATH',
+parser.add_argument('--vol_data_dir', default='../../Data/public_data/volume', type=str, metavar='PATH',
+                    help='path to volume data')
+parser.add_argument('--train_list_dir', default='../../Data/public_data/dir/train_list.txt', type=str, metavar='PATH',
                     help='path to train data list txt file')
-parser.add_argument('--test_list_dir', default='../../Data/3Ddata/dir/test_list.txt', type=str, metavar='PATH',
+parser.add_argument('--test_list_dir', default='../../Data/public_data/dir/test_list.txt', type=str, metavar='PATH',
                     help='path to test data list txt file')
 
 best_m = 0
@@ -142,19 +142,27 @@ def main():
     # 1) training data
     train_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
                                            list_file=args.train_list_dir,
-                                           transform=None)
+                                           transform=transforms_3d.Compose(
+                                               [transforms_3d.Resize([16, 112, 112]),
+                                                transforms_3d.MakeNChannel(3),
+                                                transforms_3d.Normalize(mean=[0, 0, 0], std=[2000, 2000, 2000]),
+                                                ]))
     train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
                               shuffle=True, num_workers=args.workers, pin_memory=True)
 
     # 2) validation data
     val_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
                                          list_file=args.test_list_dir,
-                                         transform=None)
+                                         transform=transforms_3d.Compose(
+                                             [transforms_3d.Resize([16, 112, 112]),
+                                              transforms_3d.MakeNChannel(3),
+                                              transforms_3d.Normalize(mean=[0, 0, 0], std=[2000, 2000, 2000]),
+                                              ]))
     val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size,
                             shuffle=False, num_workers=args.workers, pin_memory=True)
 
     ''' Create logger for recording the training (Tensorboard)'''
-    data_logger = Logger('./logs/', name=args.model_name)
+    data_logger = Logger('./logs/', name=args.model)
 
     ''' Training for epochs'''
     for epoch in range(args.start_epoch, args.epochs):
@@ -184,13 +192,13 @@ def train(train_loader, model, criterion, optimizer, epoch, data_logger=None):
 
     # switch to training mode and train
     model.train()
-    for i, (input_vol, class_vec) in enumerate(train_loader):
+    for i, (input_vol,  class_vec) in enumerate(train_loader):
         input_vol_var = torch.autograd.Variable(input_vol, requires_grad=True).cuda()
         class_vec = class_vec.type(torch.FloatTensor).cuda()
         class_vec_var = torch.autograd.Variable(class_vec)
 
         # 1) output classification
-        output = model(input_vol)
+        output = model(input_vol_var)
 
         # 2) compute the current loss
         loss = criterion(output, class_vec_var)
