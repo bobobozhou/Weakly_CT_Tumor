@@ -2,57 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68a394d5-49e3-4f4a-ad5a-3e1b8b82495f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358335.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358371.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358663.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358714.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358744.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358816.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358863.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531358964.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359006.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359055.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359092.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359135.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359202.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359305.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531359359.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531365592.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531365683.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531365706.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367144.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367376.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367401.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367459.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367505.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367586.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367674.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531367943.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531368108.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531368146.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531368238.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531369262.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531369349.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531369519.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531369661.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531369909.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370000.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370036.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370125.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370160.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370202.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370235.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnet/events.out.tfevents.1531370275.bo-Alienware-Aurora-R6resnet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531368690.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531368740.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531368804.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531369087.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531369131.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/1_Train_CNN/logs/resnext/events.out.tfevents.1531369213.bo-Alienware-Aurora-R6resnext" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/utililies.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/gb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/gb.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/respond_cam.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/respond_cam.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/respond_cam_gb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/examples/respond_cam_gb.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,46 +20,52 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Weakly_CT_Tumor$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1531451951473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/2_Segment_Weak" />
+    <SUITE FILE_PATH="coverage/Weakly_CT_Tumor$Respond_CAM.coverage" NAME="Respond_CAM Coverage Results" MODIFIED="1531543972557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/2_Segment_Weak" />
+    <SUITE FILE_PATH="coverage/Weakly_CT_Tumor$test_Respond_CAM.coverage" NAME="test_Respond_CAM Coverage Results" MODIFIED="1531547466608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/2_Segment_Weak" />
+    <SUITE FILE_PATH="coverage/Weakly_CT_Tumor$test_2dresnet_Respond_CAM.coverage" NAME="test_2dresnet_Respond_CAM Coverage Results" MODIFIED="1531544592078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Code/2_Segment_Weak" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="data_loader.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/data_loader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="20" />
+            <state relative-caret-position="343">
+              <caret line="107" column="16" lean-forward="true" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
               <folding>
-                <element signature="e#106#129#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test.py">
+      <file leaf-file-name="Respond_CAM.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            <state relative-caret-position="144">
+              <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_Respond_CAM.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2250">
+              <caret line="125" column="48" lean-forward="true" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resnet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/models_set/resnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="141" column="37" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,10 +83,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py" />
         <option value="$PROJECT_DIR$/Code/2_Segment_Weak/Grad_CAM.py" />
         <option value="$PROJECT_DIR$/Code/2_Segment_Weak/utililies.py" />
         <option value="$PROJECT_DIR$/Code/1_Train_CNN/utilizes.py" />
@@ -136,8 +101,12 @@
         <option value="$PROJECT_DIR$/Code/1_Train_CNN/transforms_3D/transforms_3d.py" />
         <option value="$PROJECT_DIR$/Code/1_Train_CNN/models_set/resnet.py" />
         <option value="$PROJECT_DIR$/Code/1_Train_CNN/train.py" />
-        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py" />
         <option value="$PROJECT_DIR$/Code/2_Segment_Weak/test.py" />
+        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py" />
+        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py" />
+        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/test_2dresnet_Respond_CAM.py" />
+        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py" />
+        <option value="$PROJECT_DIR$/Code/2_Segment_Weak/models_set/resnet.py" />
       </list>
     </option>
   </component>
@@ -150,7 +119,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="174" />
     <option name="y" value="185" />
     <option name="width" value="1855" />
@@ -180,7 +149,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,10 +167,18 @@
               <item name="Code" type="462c0819:PsiDirectoryNode" />
               <item name="2_Segment_Weak" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Weakly_CT_Tumor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Weakly_CT_Tumor" type="462c0819:PsiDirectoryNode" />
+              <item name="Code" type="462c0819:PsiDirectoryNode" />
+              <item name="2_Segment_Weak" type="462c0819:PsiDirectoryNode" />
+              <item name="models_set" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,26 +198,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test (1)">
-    <configuration name="Grad_CAM" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Weakly_CT_Tumor" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code/2_Segment_Weak" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/2_Segment_Weak/Grad_CAM.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.test_Respond_CAM">
     <configuration name="Respond_CAM" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Weakly_CT_Tumor" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -280,7 +237,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test_2dresnet_Respond_CAM" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Weakly_CT_Tumor" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -288,12 +245,31 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code/1_Train_CNN/transforms_3D" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code/2_Segment_Weak" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/1_Train_CNN/transforms_3D/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/2_Segment_Weak/test_2dresnet_Respond_CAM.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="test_Respond_CAM" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Weakly_CT_Tumor" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code/2_Segment_Weak" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -319,19 +295,19 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.Grad_CAM" />
       <item itemvalue="Python.Respond_CAM" />
       <item itemvalue="Python.train" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.test (1)" />
+      <item itemvalue="Python.test_Respond_CAM" />
+      <item itemvalue="Python.test_2dresnet_Respond_CAM" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_Respond_CAM" />
+        <item itemvalue="Python.test_2dresnet_Respond_CAM" />
+        <item itemvalue="Python.Respond_CAM" />
         <item itemvalue="Python.test (1)" />
         <item itemvalue="Python.train" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.Respond_CAM" />
-        <item itemvalue="Python.Grad_CAM" />
       </list>
     </recent_temporary>
   </component>
@@ -354,24 +330,24 @@
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32984293" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32948583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32948583" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3210913" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.33945945" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16141514" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16307352" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.37565583" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.37565583" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
     </layout>
@@ -384,10 +360,75 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="54" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/functional.py</url>
+          <line>993</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py</url>
+          <line>229</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="85" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/data_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+          <folding>
+            <element signature="e#172#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3996">
+          <caret line="230" column="23" lean-forward="true" selection-start-line="230" selection-start-column="23" selection-end-line="230" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/data_loader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1026">
@@ -440,13 +481,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utililies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utililies.py" />
     <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/utilizes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3048">
@@ -505,31 +540,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/functional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="991" selection-start-line="991" selection-end-line="991" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
           <caret line="164" column="41" lean-forward="true" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="491" selection-start-line="491" selection-end-line="491" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/modules/conv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7470">
-          <caret line="420" selection-start-line="420" selection-end-line="420" />
         </state>
       </provider>
     </entry>
@@ -547,13 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/data_loader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -565,19 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="162" selection-start-line="162" selection-end-line="162" />
-          <folding>
-            <element signature="e#28#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="241" column="35" lean-forward="true" selection-start-line="241" selection-start-column="35" selection-end-line="241" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -588,22 +582,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py">
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="201">
+          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding>
-            <element signature="e#106#129#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test.py">
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_3DCRF_DIS.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+        <state>
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/1_Train_CNN/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-684">
+          <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
+          <folding>
+            <element signature="e#172#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/modules/conv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4824">
+          <caret line="442" column="42" lean-forward="true" selection-start-line="442" selection-start-column="42" selection-end-line="442" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/modules/linear.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="531" selection-start-line="531" selection-end-line="531" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="107" column="16" lean-forward="true" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/Respond_CAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_2dresnet_Respond_CAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-665">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Virtualenv/TEST/local/lib/python2.7/site-packages/torch/nn/functional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="991" selection-start-line="991" selection-end-line="991" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/models_set/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="141" column="37" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/2_Segment_Weak/test_Respond_CAM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2250">
+          <caret line="125" column="48" lean-forward="true" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>

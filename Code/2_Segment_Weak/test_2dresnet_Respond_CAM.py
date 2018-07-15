@@ -6,12 +6,43 @@ from torchvision import utils
 import cv2
 import sys
 import numpy as np
+from model import *
 from utilities import *
 import argparse
 
+parser = argparse.ArgumentParser(description='Pytorch: 3D CNN for Classification')
+
+# Model structure setting
+parser.add_argument('--model', default='resnet',
+                    help='model name: (resnet | preresnet | wideresnet | resnext | densenet)')
+parser.add_argument('--model_depth', default=34, type=int,
+                    help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
+parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-34-kinetics.pth', type=str,
+                    help='Pretrained model (.pth)')
+
+parser.add_argument('--resnet_shortcut', default='B', type=str,
+                    help='Shortcut type of resnet (A | B)')
+parser.add_argument('--wide_resnet_k', default=2, type=int,
+                    help='Wide resnet k')
+parser.add_argument('--resnext_cardinality', default=32, type=int,
+                    help='ResNeXt cardinality')
+
+parser.add_argument('--n_classes', default=3, type=int,
+                    help='Number of classes output')
+parser.add_argument('--sample_size', default=112, type=int,
+                    help='Height and width of inputs')
+parser.add_argument('--sample_duration', default=16, type=int,
+                    help='Distance on z-axis of inputs')
+
+# Respond-CAM setting
+parser.add_argument('--use_cuda', action='store_true', default=True,
+                    help='Use NVIDIA GPU acceleration')
+parser.add_argument('--image_path', type=str, default='./examples/both.png',
+                    help='Input image path')
+
 
 class FeatureExtractor():
-    """ Class for extracting activations and 
+    """ Class for extracting activations and
     registering gradients from targetted intermediate layers """
 
     def __init__(self, model, target_layers):
@@ -26,7 +57,11 @@ class FeatureExtractor():
         outputs = []
         self.gradients = []
         for name, module in self.model._modules.items():
+            if name is 'fc':
+                x = x.view(x.size(0), -1)
+
             x = module(x)
+
             if name in self.target_layers:
                 x.register_hook(self.save_gradient)
                 outputs += [x]
@@ -41,7 +76,7 @@ class ModelOutputs():
 
     def __init__(self, model, target_layers):
         self.model = model
-        self.feature_extractor = FeatureExtractor(self.model.features, target_layers)
+        self.feature_extractor = FeatureExtractor(self.model, target_layers)
 
     def get_gradients(self):
         return self.feature_extractor.gradients
@@ -49,7 +84,6 @@ class ModelOutputs():
     def __call__(self, x):
         target_activations, output = self.feature_extractor(x)
         output = output.view(output.size(0), -1)
-        output = self.model.classifier(output)
         return target_activations, output
 
 
@@ -83,8 +117,7 @@ class RespondCam:
         else:
             one_hot = torch.sum(one_hot * output)
 
-        self.model.features.zero_grad()
-        self.model.classifier.zero_grad()
+        self.model.zero_grad()
         one_hot.backward(retain_graph=True)
 
         grads_val = self.extractor.get_gradients()[-1].cpu().data.numpy()
@@ -168,22 +201,6 @@ class GuidedBackpropReLUModel:
         return output
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--use-cuda', action='store_true', default=True,
-                        help='Use NVIDIA GPU acceleration')
-    parser.add_argument('--image-path', type=str, default='./examples/both.png',
-                        help='Input image path')
-    args = parser.parse_args()
-    args.use_cuda = args.use_cuda and torch.cuda.is_available()
-    if args.use_cuda:
-        print("Using GPU for acceleration")
-    else:
-        print("Using CPU for computation")
-
-    return args
-
-
 if __name__ == '__main__':
     """ python respond_cam.py <path_to_image>
     1. Loads an image with opencv.
@@ -192,12 +209,13 @@ if __name__ == '__main__':
     and computes intermediate activations.
     Makes the visualization. """
 
-    args = get_args()
+    global args
+    args = parser.parse_args()
 
     # Can work with any model, but it assumes that the model has a
     # feature method, and a classifier method,
     # as in the VGG models in torchvision.
-    respond_cam = RespondCam(model=models.vgg19(pretrained=True), target_layer_names=["35"], use_cuda=args.use_cuda)
+    respond_cam_res = RespondCam(model=models.resnet101(pretrained=True), target_layer_names=["layer4"], use_cuda=args.use_cuda)
 
     img = cv2.imread(args.image_path, 1)
     img = np.float32(cv2.resize(img, (224, 224))) / 255
@@ -207,7 +225,7 @@ if __name__ == '__main__':
     # Otherwise, targets the requested index.
     target_index = None
 
-    mask = respond_cam(input, target_index)
+    mask = respond_cam_res(input, target_index)
 
     show_cam_on_image(img, mask)
 
