@@ -82,8 +82,7 @@ for i = 3:4:length(files)
     vec_cls = zeros(1,3); 
     vec_cls(1) = 1;
 
-    line = char(strcat(vol_file_name, " ", midimg_file_name, ...
-        sprintf(' %d', vec_cls), " \r\n"));
+    line = char(strcat(vol_file_name, " ", num2str(vec_cls), " \r\n"));
     fprintf(fileID_train, line);
     
     
@@ -140,11 +139,10 @@ for i = 3:4:length(files)
     save(midimg_save, 'midimg_patch');
     vol_save = char(strcat(save_dir, 'volume/', vol_file_name));
     save(vol_save, 'vol_patch');
-    
-    vec_cls = zeros(1,3);
 
+    line = char(strcat(vol_file_name, " ", num2str(vec_cls), " \r\n"));
     line = char(strcat(vol_file_name, " ", midimg_file_name, ...
-        sprintf(' %d', vec_cls), " \r\n"));
+        " 0 0 0 \r\n"));
     fprintf(fileID_train, line);
     
 end
