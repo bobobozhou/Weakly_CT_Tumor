@@ -42,11 +42,10 @@ for i = 3:4:length(files)
         
         % pipeline for normalize/shift to (>0) HU value
         min_vol = min(V_ct_new(:));
-        if min_vol <= -1001 && min(V_ct_new(V_ct_new > min_vol)) < -800
+        if min_vol <= -1001 && min(V_ct_new(V_ct_new > min_vol)) < -200
             V_ct_new = V_ct_new + 1000;
         else
-            if min(V_ct_new(V_ct_new > min_vol)) < -800
-                V_ct_new = V_ct_new + 1000;
+            if min(V_ct_new(V_ct_new > min_vol)) < -200
             end
         end
         V_ct_new(V_ct_new<-500) = 0;
