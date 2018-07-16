@@ -34,7 +34,7 @@ class CTTumorDataset_FreeSeg(Dataset):
                 vol_name = os.path.join(vol_data_dir, vol_name)
                 vol_names.append(vol_name)
 
-                class_vec = items[1:]
+                class_vec = items[2:]
                 class_vec = [int(i) for i in class_vec]
                 class_vecs.append(class_vec)
 

@@ -1,14 +1,64 @@
 import torch
 from torch import nn
-from models_set import resnet, pre_act_resnet, resnext, densenet
+from models_set import resnet, pre_act_resnet, resnext, densenet, spa_resnet
+import ipdb
 
 
 def generate_model(args, PreTrain=True):
     assert args.model in [
-        'resnet', 'preresnet', 'resnext', 'densenet'
+        'resnet', 'preresnet', 'resnext', 'densenet', 'spa_resnet'
     ]
 
-    if args.model == 'resnet':
+    if args.model == 'spa_resnet':
+        assert args.model_depth in [10, 18, 34, 50, 101]
+
+        from models_set.spa_resnet import get_fine_tuning_parameters
+
+        if args.model_depth == 10:
+            model = spa_resnet.spa_resnet10(
+                num_classes=args.n_classes,
+                shortcut_type=args.resnet_shortcut,
+                sample_size=args.sample_size,
+                sample_duration=args.sample_duration)
+        elif args.model_depth == 18:
+            model = spa_resnet.spa_resnet18(
+                num_classes=args.n_classes,
+                shortcut_type=args.resnet_shortcut,
+                sample_size=args.sample_size,
+                sample_duration=args.sample_duration)
+        elif args.model_depth == 34:
+            model = spa_resnet.spa_resnet34(
+                num_classes=args.n_classes,
+                shortcut_type=args.resnet_shortcut,
+                sample_size=args.sample_size,
+                sample_duration=args.sample_duration)
+        elif args.model_depth == 50:
+            model = spa_resnet.spa_resnet50(
+                num_classes=args.n_classes,
+                shortcut_type=args.resnet_shortcut,
+                sample_size=args.sample_size,
+                sample_duration=args.sample_duration)
+        elif args.model_depth == 101:
+            model = spa_resnet.spa_resnet101(
+                num_classes=args.n_classes,
+                shortcut_type=args.resnet_shortcut,
+                sample_size=args.sample_size,
+                sample_duration=args.sample_duration)
+
+        if PreTrain:
+            print('loading pretrained model {}'.format(args.pretrain_path))
+
+            state_dict_pretrain = torch.load(args.pretrain_path)['state_dict']
+            state_dict_new = {}
+            for item_name, item_value in state_dict_pretrain.iteritems():
+                if 'fc' not in item_name and 'layer4' not in item_name:
+                    state_dict_new[item_name.replace('module.', '')] = item_value
+
+            model_dict = model.state_dict()
+            model_dict.update(state_dict_new)
+            model.load_state_dict(model_dict)
+
+    elif args.model == 'resnet':
         assert args.model_depth in [10, 18, 34, 50, 101, 152, 200]
 
         from models_set.resnet import get_fine_tuning_parameters
@@ -55,6 +105,19 @@ def generate_model(args, PreTrain=True):
                 shortcut_type=args.resnet_shortcut,
                 sample_size=args.sample_size,
                 sample_duration=args.sample_duration)
+
+        if PreTrain:
+            print('loading pretrained model {}'.format(args.pretrain_path))
+
+            state_dict_pretrain = torch.load(args.pretrain_path)['state_dict']
+            state_dict_new = {}
+            for item_name, item_value in state_dict_pretrain.iteritems():
+                if 'fc' not in item_name:
+                    state_dict_new[item_name.replace('module.', '')] = item_value
+
+            model_dict = model.state_dict()
+            model_dict.update(state_dict_new)
+            model.load_state_dict(model_dict)
 
     elif args.model == 'resnext':
         assert args.model_depth in [50, 101, 152]
@@ -150,23 +213,5 @@ def generate_model(args, PreTrain=True):
                 num_classes=args.n_classes,
                 sample_size=args.sample_size,
                 sample_duration=args.sample_duration)
-
-    if PreTrain:
-        print('loading pretrained model {}'.format(args.pretrain_path))
-
-        state_dict_pretrain = torch.load(args.pretrain_path)['state_dict']
-        state_dict_new = {}
-        for item_name, item_value in state_dict_pretrain.iteritems():
-            if 'fc' not in item_name:
-                state_dict_new[item_name.replace('module.', '')] = item_value
-
-        model_dict = model.state_dict()
-        model_dict.update(state_dict_new)
-        model.load_state_dict(model_dict)
-
-        if args.model == 'densenet':
-            model.classifier = nn.Linear(model.classifier.in_features, args.n_classes)
-        else:
-            model.fc = nn.Linear(model.fc.in_features, args.n_classes)
 
     return model

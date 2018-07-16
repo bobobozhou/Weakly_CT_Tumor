@@ -34,11 +34,11 @@ from utilizes import *
 parser = argparse.ArgumentParser(description='Pytorch: 3D CNN for Classification')
 
 # Model structure setting
-parser.add_argument('--model', default='resnet',
+parser.add_argument('--model', default='spa_resnet',
                     help='model name: (resnet | preresnet | wideresnet | resnext | densenet)')
-parser.add_argument('--model_depth', default=34, type=int,
+parser.add_argument('--model_depth', default=101, type=int,
                     help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
-parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-34-kinetics.pth', type=str,
+parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-101-kinetics.pth', type=str,
                     help='Pretrained model (.pth)')
 
 parser.add_argument('--resnet_shortcut', default='B', type=str,
@@ -62,7 +62,7 @@ parser.add_argument('--epochs', default=1000000, type=int, metavar='N',
                     help='number of epochs for training network')
 parser.add_argument('--start_epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
-parser.add_argument('--batch_size', default=2, type=int, metavar='N',
+parser.add_argument('--batch_size', default=6, type=int, metavar='N',
                     help='mini-batch size for training (default: 64)')
 parser.add_argument('--lr', default=0.0001, type=float, metavar='LR',
                     help='initial learning rate')
@@ -143,7 +143,7 @@ def main():
     train_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
                                            list_file=args.train_list_dir,
                                            transform=transforms_3d.Compose(
-                                               [transforms_3d.Resize([16, 112, 112]),
+                                               [transforms_3d.Resize([64, 224, 224]),
                                                 transforms_3d.MakeNChannel(3),
                                                 transforms_3d.Normalize(mean=[0, 0, 0], std=[2000, 2000, 2000]),
                                                 ]))
@@ -154,7 +154,7 @@ def main():
     val_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
                                          list_file=args.test_list_dir,
                                          transform=transforms_3d.Compose(
-                                             [transforms_3d.Resize([16, 112, 112]),
+                                             [transforms_3d.Resize([64, 224, 224]),
                                               transforms_3d.MakeNChannel(3),
                                               transforms_3d.Normalize(mean=[0, 0, 0], std=[2000, 2000, 2000]),
                                               ]))

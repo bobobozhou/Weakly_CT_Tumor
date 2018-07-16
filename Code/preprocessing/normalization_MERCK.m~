@@ -30,6 +30,21 @@ for i = 3:4:length(files)
             pixel_size_ct = [0.75, 0.75, 2.5];
         end
         
+        % pipeline for normalize/shift to (>0) HU value
+        if min(V_ct(:)) < -1000   % if there is outside (negative padding)
+            V_ct(V_ct<-1000) = -3000;  % replace with -3000
+        end
+        
+        min_vol = min(V_ct(:));
+        if min_vol <= -1001 && min(V_ct(V_ct > min_vol)) < -800
+            V_ct = V_ct + 1000;
+        else
+            if min(V_ct(V_ct > min_vol)) < -800
+                V_ct = V_ct + 1000;
+            end
+        end
+        V_ct(V_ct<-500) = 0;
+        
         % interpolate ct volume & save
         size_org = size(V_ct);
         size_new = round(size_org .* (pixel_size_ct ./ [0.75, 0.75, 1]));
@@ -39,16 +54,7 @@ for i = 3:4:length(files)
             linspace(1, size_org(3), size_new(3)));
         
         V_ct_new = interp3(X, Y, Z, V_ct, Xq, Yq, Zq, 'spline');
-        
-        % pipeline for normalize/shift to (>0) HU value
-        min_vol = min(V_ct_new(:));
-        if min_vol <= -1001 && min(V_ct_new(V_ct_new > min_vol)) < -200
-            V_ct_new = V_ct_new + 1000;
-        else
-            if min(V_ct_new(V_ct_new > min_vol)) < -200
-            end
-        end
-        V_ct_new(V_ct_new<-500) = 0;
+        V_ct_new(V_ct_new<0) = 0;
         
         fprintf('max= %0.1f; min= %0.1f;', max(V_ct_new(:)), min(V_ct_new(:)));
     

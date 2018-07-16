@@ -71,8 +71,8 @@ for i = 3:4:length(files)
     midimg_patch = V_ct(x_start:x_end, y_start:y_end, z_mid);
 
     % save the img & label & txt information
-    midimg_file_name = strcat(strtok(filename, '_label.hdr'), '_img_tumor_', string(z_mid), '.mat');
-    vol_file_name = strcat(strtok(filename, '_label.hdr'), '_vol_tumor_', string(z_mid), '.mat');
+    midimg_file_name = strcat(strrep(filename, '_label.hdr', '_img_tumor_'), string(z_mid), '.mat');
+    vol_file_name = strcat(strrep(filename, '_label.hdr', '_vol_tumor_'), string(z_mid), '.mat');
 
     midimg_save = char(strcat(save_dir, 'image/', midimg_file_name));
     save(midimg_save, 'midimg_patch');
@@ -133,8 +133,8 @@ for i = 3:4:length(files)
     midimg_patch = double(V_ct(x_start:x_end, y_start:y_end, z_mid));
 
     % save the img & label & txt information
-    midimg_file_name = strcat(strtok(filename, '_label.hdr'), '_img_nontumor_', string(z_mid), '.mat');
-    vol_file_name = strcat(strtok(filename, '_label.hdr'), '_vol_nontumor_', string(z_mid), '.mat');
+    midimg_file_name = strcat(strrep(filename, '_label.hdr', '_img_nontumor_'), string(z_mid), '.mat');
+    vol_file_name = strcat(strrep(filename, '_label.hdr', '_vol_nontumor_'), string(z_mid), '.mat');
 
     midimg_save = char(strcat(save_dir, 'image/', midimg_file_name));
     save(midimg_save, 'midimg_patch');
