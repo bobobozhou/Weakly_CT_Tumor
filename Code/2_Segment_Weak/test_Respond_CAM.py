@@ -15,9 +15,9 @@ parser = argparse.ArgumentParser(description='Pytorch: 3D CNN for Classification
 # Model structure setting
 parser.add_argument('--model', default='resnet',
                     help='model name: (resnet | preresnet | wideresnet | resnext | densenet)')
-parser.add_argument('--model_depth', default=34, type=int,
+parser.add_argument('--model_depth', default=101, type=int,
                     help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
-parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-34-kinetics.pth', type=str,
+parser.add_argument('--pretrain_path', default='./models_set/pretrained/resnet-101-kinetics.pth', type=str,
                     help='Pretrained model (.pth)')
 
 parser.add_argument('--resnet_shortcut', default='B', type=str,
@@ -215,7 +215,8 @@ if __name__ == '__main__':
     # Can work with any model, but it assumes that the model has a
     # feature method, and a classifier method,
     # as in the VGG models in torchvision.
-    respond_cam_res = RespondCam(model=generate_model(args, PreTrain=True), target_layer_names=["layer4"], use_cuda=args.use_cuda)
+    model_res = generate_model(args, PreTrain=True)
+    respond_cam_res = RespondCam(model=model_res, target_layer_names=["layer3"], use_cuda=args.use_cuda)
 
     vol = np.random.rand(3,64,224,224)
     vol_tensor = torch.from_numpy(vol).float().unsqueeze_(0)

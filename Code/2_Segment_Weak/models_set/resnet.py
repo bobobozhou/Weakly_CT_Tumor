@@ -248,6 +248,13 @@ def resnet101(**kwargs):
     return model
 
 
+def resnet101_custom(**kwargs):
+    """Constructs a customized ResNet-101 model.
+    """
+    model = ResNet(Bottleneck, [3, 4, 23, 1], **kwargs)
+    return model
+
+
 def resnet152(**kwargs):
     """Constructs a ResNet-101 model.
     """

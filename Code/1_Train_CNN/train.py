@@ -62,7 +62,7 @@ parser.add_argument('--epochs', default=1000000, type=int, metavar='N',
                     help='number of epochs for training network')
 parser.add_argument('--start_epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
-parser.add_argument('--batch_size', default=6, type=int, metavar='N',
+parser.add_argument('--batch_size', default=1, type=int, metavar='N',
                     help='mini-batch size for training (default: 64)')
 parser.add_argument('--lr', default=0.0001, type=float, metavar='LR',
                     help='initial learning rate')
@@ -165,26 +165,34 @@ def main():
     data_logger = Logger('./logs/', name=args.model)
 
     ''' Training for epochs'''
-    for epoch in range(args.start_epoch, args.epochs):
-        adjust_learning_rate(optimizer, epoch)
+    TRAIN_STATUS=True
+    if TRAIN_STATUS is True:
+        for epoch in range(args.start_epoch, args.epochs):
+            adjust_learning_rate(optimizer, epoch)
 
-        # train for one epoch
-        train(train_loader, model, criterion, optimizer, epoch, data_logger=data_logger)
+            # train for one epoch
+            train(train_loader, model, criterion, optimizer, epoch, data_logger=data_logger)
 
-        # evaluate on validation set
-        if epoch % args.ef == 0 or epoch == args.epochs:
-            m = validate(val_loader, model, criterion, epoch, data_logger=data_logger)
+            # evaluate on validation set
+            if epoch % args.ef == 0 or epoch == args.epochs:
+                m = validate(val_loader, model, criterion, epoch, data_logger=data_logger)
 
-            # remember best metric and save checkpoint
-            is_best = m > best_m
-            best_m = max(m, best_m)
-            save_checkpoint({
-                'epoch': epoch + 1,
-                'model': args.model_name,
-                'state_dict': model.state_dict(),
-                'best_m': best_m,
-                'optimizer': optimizer.state_dict(),
-            }, is_best, model=args.model_name)
+                # remember best metric and save checkpoint
+                is_best = m > best_m
+                best_m = max(m, best_m)
+                save_checkpoint({
+                    'epoch': epoch + 1,
+                    'model': args.model_name,
+                    'state_dict': model.state_dict(),
+                    'best_m': best_m,
+                    'optimizer': optimizer.state_dict(),
+                }, is_best, model=args.model_name)
+
+    ''' Validation'''
+    TEST_STATUS = True
+    if TEST_STATUS is True:
+        epoch = 1
+        m = validate(val_loader, model, criterion, epoch, data_logger=data_logger)
 
 
 def train(train_loader, model, criterion, optimizer, epoch, data_logger=None):
