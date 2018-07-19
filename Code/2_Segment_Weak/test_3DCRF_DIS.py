@@ -5,8 +5,8 @@ import os
 from utilities import *
 
 # generate test data
-vol_name = '../../Data/public_data/volume/R01-001_vol_241.mat'
-vol = np.array(loadmat(vol_name)['vol_patch_tumor'], dtype=float)
+vol_name = '../../Data/public_data/volume/R01-001_vol_tumor_240.mat'
+vol = np.array(loadmat(vol_name)['vol_patch'], dtype=float)
 vol = (vol - vol.min())/(vol.max()-vol.min())
 
 pos = np.repeat(vol[:, :, :, np.newaxis], 5, axis=3)

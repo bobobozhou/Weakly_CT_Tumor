@@ -62,7 +62,7 @@ parser.add_argument('--epochs', default=1000000, type=int, metavar='N',
                     help='number of epochs for training network')
 parser.add_argument('--start_epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
-parser.add_argument('--batch_size', default=1, type=int, metavar='N',
+parser.add_argument('--batch_size', default=3, type=int, metavar='N',
                     help='mini-batch size for training (default: 64)')
 parser.add_argument('--lr', default=0.0001, type=float, metavar='LR',
                     help='initial learning rate')
@@ -92,11 +92,11 @@ parser.add_argument('--ef', default=1, type=int, metavar='N',
                     help='evaluate print frequency (default: 2)')
 
 '''Set up Data Directory'''
-parser.add_argument('--vol_data_dir', default='../../Data/public_data/volume', type=str, metavar='PATH',
+parser.add_argument('--vol_data_dir', default='../../Data/merck_data/volume', type=str, metavar='PATH',
                     help='path to volume data')
-parser.add_argument('--train_list_dir', default='../../Data/public_data/dir/train_list.txt', type=str, metavar='PATH',
+parser.add_argument('--train_list_dir', default='../../Data/merck_data/dir/train_list.txt', type=str, metavar='PATH',
                     help='path to train data list txt file')
-parser.add_argument('--test_list_dir', default='../../Data/public_data/dir/test_list.txt', type=str, metavar='PATH',
+parser.add_argument('--test_list_dir', default='../../Data/merck_data/dir/test_list.txt', type=str, metavar='PATH',
                     help='path to test data list txt file')
 
 best_m = 0
@@ -182,11 +182,11 @@ def main():
                 best_m = max(m, best_m)
                 save_checkpoint({
                     'epoch': epoch + 1,
-                    'model': args.model_name,
+                    'model': args.model,
                     'state_dict': model.state_dict(),
                     'best_m': best_m,
                     'optimizer': optimizer.state_dict(),
-                }, is_best, model=args.model_name)
+                }, is_best, model=args.model)
 
     ''' Validation'''
     TEST_STATUS = True

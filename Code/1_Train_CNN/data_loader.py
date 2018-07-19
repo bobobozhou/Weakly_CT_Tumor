@@ -56,7 +56,6 @@ class CTTumorDataset_FreeSeg(Dataset):
         # image loader
         vol_name = self.vol_names[index]
         vol = np.array(loadmat(vol_name)['vol_patch'], dtype=float)
-        vol = np.transpose(vol, (2, 0, 1))
         vol = torch.from_numpy(vol).float()
 
         if self.transform is not None:

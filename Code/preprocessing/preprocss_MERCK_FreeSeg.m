@@ -92,9 +92,11 @@ for i = 1:size(info_raw)
     end
     
     vol_patch = V_ct(x_start:x_end, y_start:y_end, z_start:z_end);
+    vol_patch = permute(vol_patch, [3,1,2]);
     midimg_patch = V_ct(x_start:x_end, y_start:y_end, z_mid);
 
     % save the img & label & txt information
+    filename = filename(~isspace(filename));
     midimg_file_name = strcat(strrep(filename, '_label', '_img_tumor_'), string(z_mid), '.mat');
     vol_file_name = strcat(strrep(filename, '_label', '_vol_tumor_'), string(z_mid), '.mat');
 
@@ -156,9 +158,11 @@ for i = 1:size(info_raw)
         end
 
         vol_patch = V_ct(x_start:x_end, y_start:y_end, z_start:z_end);
+        vol_patch = permute(vol_patch, [3,1,2]);
         midimg_patch = double(V_ct(x_start:x_end, y_start:y_end, z_mid));
 
         % save the img & label & txt information
+        filename = filename(~isspace(filename));
         midimg_file_name = strcat(strrep(filename, '_label', '_img_nontumor_'), string(z_mid), '.mat');
         vol_file_name = strcat(strrep(filename, '_label', '_vol_nontumor_'), string(z_mid), '.mat');
 
