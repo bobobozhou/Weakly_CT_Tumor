@@ -48,7 +48,7 @@ parser.add_argument('--wide_resnet_k', default=2, type=int,
 parser.add_argument('--resnext_cardinality', default=32, type=int,
                     help='ResNeXt cardinality')
 
-parser.add_argument('--n_classes', default=3, type=int,
+parser.add_argument('--n_classes', default=8, type=int,
                     help='Number of classes output')
 parser.add_argument('--sample_size', default=112, type=int,
                     help='Height and width of inputs')
@@ -92,11 +92,13 @@ parser.add_argument('--ef', default=1, type=int, metavar='N',
                     help='evaluate print frequency (default: 2)')
 
 '''Set up Data Directory'''
-parser.add_argument('--vol_data_dir', default='../../Data/merck_data/volume', type=str, metavar='PATH',
+parser.add_argument('--vol_data_dir', default='../../Data/nih_data/volume', type=str, metavar='PATH',
                     help='path to volume data')
-parser.add_argument('--train_list_dir', default='../../Data/merck_data/dir/train_list.txt', type=str, metavar='PATH',
+parser.add_argument('--mask_data_dir', default='../../Data/nih_data/mask', type=str, metavar='PATH',
+                    help='path to mask data')
+parser.add_argument('--train_list_dir', default='../../Data/nih_data/dir/train_list.txt', type=str, metavar='PATH',
                     help='path to train data list txt file')
-parser.add_argument('--test_list_dir', default='../../Data/merck_data/dir/test_list.txt', type=str, metavar='PATH',
+parser.add_argument('--test_list_dir', default='../../Data/nih_data/dir/test_list.txt', type=str, metavar='PATH',
                     help='path to test data list txt file')
 
 best_m = 0
@@ -141,6 +143,7 @@ def main():
     '''
     # 1) training data
     train_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
+    									   mask_data_dir=args.mask_data_dir,
                                            list_file=args.train_list_dir,
                                            transform=transforms_3d.Compose(
                                                [transforms_3d.Resize([64, 224, 224]),
@@ -152,6 +155,7 @@ def main():
 
     # 2) validation data
     val_dataset = CTTumorDataset_FreeSeg(vol_data_dir=args.vol_data_dir,
+    	    						     mask_data_dir=args.mask_data_dir,
                                          list_file=args.test_list_dir,
                                          transform=transforms_3d.Compose(
                                              [transforms_3d.Resize([64, 224, 224]),

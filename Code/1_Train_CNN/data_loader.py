@@ -12,7 +12,7 @@ import ipdb
 class CTTumorDataset_FreeSeg(Dataset):
     """"CT Tumor 2D Data loader"""
 
-    def __init__(self, vol_data_dir, list_file, transform=None, norm=None):
+    def __init__(self, vol_data_dir, mask_data_dir, list_file, transform=None, norm=None):
 
         """
         Args:
@@ -24,6 +24,7 @@ class CTTumorDataset_FreeSeg(Dataset):
         self.n_classes = 3
 
         vol_names = []
+        mask_names = []
         class_vecs = []
 
         with open(list_file, "r") as f:
@@ -34,11 +35,16 @@ class CTTumorDataset_FreeSeg(Dataset):
                 vol_name = os.path.join(vol_data_dir, vol_name)
                 vol_names.append(vol_name)
 
+                mask_name = items[1]
+                mask_name = os.path.join(mask_data_dir, mask_name)
+                mask_names.append(mask_name)
+
                 class_vec = items[2:]
                 class_vec = [int(i) for i in class_vec]
                 class_vecs.append(class_vec)
 
         self.vol_names = vol_names
+        self.mask_names = mask_names
         self.class_vecs = class_vecs
 
         self.transform = transform
@@ -55,7 +61,7 @@ class CTTumorDataset_FreeSeg(Dataset):
 
         # image loader
         vol_name = self.vol_names[index]
-        vol = np.array(loadmat(vol_name)['vol_patch'], dtype=float)
+        vol = np.array(loadmat(vol_name)['vol_crop'], dtype=float) + 1000
         vol = torch.from_numpy(vol).float()
 
         if self.transform is not None:

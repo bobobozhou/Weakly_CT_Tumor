@@ -113,7 +113,7 @@ class SPA_ResNet(nn.Module):
                  sample_size,
                  sample_duration,
                  shortcut_type='B',
-                 num_classes=3):
+                 num_classes=8):
         self.inplanes = 64
         super(SPA_ResNet, self).__init__()
         self.conv1 = nn.Conv3d(3, 64, kernel_size=7, stride=(1, 2, 2), padding=(3, 3, 3), bias=False)
