@@ -197,7 +197,8 @@ if __name__ == '__main__':
     # Can work with any model, but it assumes that the model has a
     # feature method, and a classifier method,
     # as in the VGG models in torchvision.
-    respond_cam = RespondCam(model=models.vgg19(pretrained=True), target_layer_names=["35"], use_cuda=args.use_cuda)
+    m = models.vgg19(pretrained=True)
+    respond_cam = RespondCam(model=m, target_layer_names=["35"], use_cuda=args.use_cuda)
 
     img = cv2.imread(args.image_path, 1)
     img = np.float32(cv2.resize(img, (224, 224))) / 255
