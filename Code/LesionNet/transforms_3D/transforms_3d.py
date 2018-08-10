@@ -39,8 +39,9 @@ class Resize(object):
         size (sequence or int): Desired output size.
     """
 
-    def __init__(self, size):
+    def __init__(self, size, order):
         self.size = size
+        self.order = order
 
     def __call__(self, vol):
         """
@@ -53,6 +54,7 @@ class Resize(object):
         vol = vol.numpy()
 
         vol_new = resize(vol, (self.size[0], self.size[1], self.size[2]),
+                         order=self.order,
                          preserve_range=True,
                          mode='symmetric')
 

@@ -18,6 +18,9 @@ clc
 data_dir = '../../Data/nih_data/Raw_DATA/Images_png/Images_png/';
 csv_filename = '../../Data/nih_data/Raw_DATA/DL_info.csv';
 save_dir = '../../Data/nih_data/';
+% data_dir = './Images_png/';
+% csv_filename = 'DL_info.csv';
+% save_dir = './nih_data/';
 
 T = readtable(csv_filename);
 cls = table2array(T(:, 10));
@@ -32,9 +35,9 @@ CT_bboxlist = table2array(T(ind_valid, 7));
 CT_RECISTlist = table2array(T(ind_valid, 6));
 CT_imgsizelist = table2array(T(ind_valid, 14));
 
-fileID_train = fopen(strcat(save_dir,'dir/','train_list.txt'),'wt');
+fileID_train = fopen(strcat(save_dir,'dir/','train_list.txt'), 'a+');
 
-for i = 1:length(CT_filelist)
+for i = 6836:length(CT_filelist)
     i
     
     % imread the volume data
@@ -76,6 +79,9 @@ for i = 1:length(CT_filelist)
     % generate close-loop image from recist
     img_loop = zeros(str2num(char(CT_imgsizelist(i))));
     img_loop = draw_loop(recist_long, recist_short, img_loop);
+    if max(img_loop) == 0
+        img_loop = img_recist;
+    end
     
     %% 1: crop the tumor sub-volume
     bbox = str2num(char(CT_bboxlist(i)));
@@ -87,18 +93,45 @@ for i = 1:length(CT_filelist)
     img_crop = img_key(x_start:x_end, y_start:y_end);
     img_recist_crop = img_recist(x_start:x_end, y_start:y_end);
     
-    % Grabcut on RECIST
-    L = superpixels(img_crop, round(numel(img_recist_crop)/1.5), 'Compactness', 0.0001);
+    % Grabcut in 3D using RECIST
+    L = superpixels3(vol_crop, round(numel(vol_crop)/40), 'Compactness', 0.00001);  % round(numel(vol_crop)/40)
     
-    ROI = false(str2num(char(CT_imgsizelist(i)))); ROI(bbox(2):bbox(4), bbox(1):bbox(3)) = true;
-    ROI = ROI(x_start:x_end, y_start:y_end);
+    ROI = false(size(vol)); ROI(bbox(2):bbox(4), bbox(1):bbox(3), :) = true;
+    ROI = ROI(x_start:x_end, y_start:y_end, :);
     
-    foremask = imerode(img_loop(x_start:x_end, y_start:y_end), strel('diamond', 1));
-    backmask = ~imdilate(img_loop(x_start:x_end, y_start:y_end), strel('diamond', 1));
+    foremask = zeros(size(vol)); foremask(:,:,keyimg - range_vol(1) + 1) = imerode(img_loop, strel('diamond', 0));
+    foremask = foremask(x_start:x_end, y_start:y_end, :);
+    backmask = zeros(size(vol)); backmask(:,:,:) = repmat(~imdilate(img_loop, strel('diamond', 2)), [1 1 size(vol,3)]);
+    backmask = backmask(x_start:x_end, y_start:y_end, :);
     
-    mask_crop = double(grabcut(img_crop, L, ROI, foremask, backmask));
-%     figure(1),imshow(img_crop, [])
-%     figure(2),imshow(mask_crop, [])
+    vol_crop_gau = imgaussfilt3(vol_crop, 0.88);
+    mask_crop = double(lazysnapping(vol_crop_gau, L, foremask, backmask));
+    
+    % post-processing for Grabcut result
+    mask_crop = mask_crop | foremask;   % include the foremask
+    
+    CC = bwconncomp(mask_crop);  % only keep the Connected-Comp overlay with RECIST
+    numPixels = zeros(1, length(CC.PixelIdxList));
+    for nn = 1:length(CC.PixelIdxList)
+        m = zeros(size(mask_crop));
+        m(CC.PixelIdxList{nn}) = 1;
+        numPixels(nn) = length(find(m .* foremask) == 1);
+    end
+    [~,idx] = max(numPixels); 
+    mask_crop = zeros(size(mask_crop));
+    mask_crop(CC.PixelIdxList{idx}) = 1;
+    
+    mask_crop = fuse_recist_mask(mask_crop, foremask);  % fuse the imerode Recist mask with current mask
+       
+    se = strel('sphere', 1); mask_crop = imdilate(mask_crop, se);  % morp processing mask
+    se = strel('sphere', 6); mask_crop = imclose(mask_crop, se);
+    
+%     figure(1),
+%     subplot(2,3,1), montage(vol_crop_gau,'DisplayRange', [-200 200]);
+%     subplot(2,3,2), montage(mask_crop,'DisplayRange', [-1 1]);
+%     subplot(2,3,3), montage(foremask,'DisplayRange', [-1 1]);
+%     subplot(2,3,4), montage(backmask,'DisplayRange', [-1 1]);
+%     subplot(2,3,5), montage(L,'DisplayRange', []);
 
     % save the information in txt
     filename = strrep(CT_filelist(i), '.png', '');
@@ -116,8 +149,8 @@ for i = 1:length(CT_filelist)
     fprintf(fileID_train, line);
     
     %% 2: crop the non-tumor sub-volume
-    TF = randi([0, 1], 1);
-    if TF == 1
+    TF = randi([0, 2], 1);
+    if TF == 1 || TF == 0
         bbox = str2num(char(CT_bboxlist(i)));
         size_x = bbox(4) - bbox(2); size_y = bbox(3) - bbox(1);
         x_start = max(1, bbox(2) - 0.15*size_x); x_end = min(size_img(1), bbox(4) + 0.15*size_x);
@@ -125,8 +158,8 @@ for i = 1:length(CT_filelist)
         
         sel = ones(size_img);
         sel(x_start:x_end, y_start:y_end) = 0;
-        sel(1:size_x+1, :) = 0; sel(end-size_x-1:end, :) = 0;
-        sel(:, 1:size_y+1) = 0; sel(:,end-size_y-1:end) = 0;
+        sel(1:0.18*size_img(1)+1, :) = 0; sel(end-0.18*size_img(1)-1:end, :) = 0;
+        sel(:, 1:0.18*size_img(2)+1) = 0; sel(:,end-0.18*size_img(2)-1:end) = 0;
         
         if ~isempty(find(sel==1))
             [x_cen_list, y_cen_list] = find(sel==1);
@@ -155,5 +188,6 @@ for i = 1:length(CT_filelist)
 end
 
 fclose(fileID_train);
+
 
 

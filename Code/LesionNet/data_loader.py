@@ -12,7 +12,7 @@ import ipdb
 class CTTumorDataset_FreeSeg(Dataset):
     """"CT Tumor 2D Data loader"""
 
-    def __init__(self, vol_data_dir, mask_data_dir, list_file, transform=None, norm=None):
+    def __init__(self, vol_data_dir, mask_data_dir, list_file, transform_vol=None, transform_mask=None):
 
         """
         Args:
@@ -47,8 +47,8 @@ class CTTumorDataset_FreeSeg(Dataset):
         self.mask_names = mask_names
         self.class_vecs = class_vecs
 
-        self.transform = transform
-        self.norm = norm
+        self.transform_vol = transform_vol
+        self.transform_mask = transform_mask
 
     def __getitem__(self, index):
         """
@@ -62,16 +62,26 @@ class CTTumorDataset_FreeSeg(Dataset):
         # volume loader
         vol_name = self.vol_names[index]
         vol = np.array(loadmat(vol_name)['vol_crop'], dtype=float) + 1000
+        vol = np.transpose(vol, [2, 0, 1])
         vol = torch.from_numpy(vol).float()
 
-        if self.transform is not None:
-            vol = self.transform(vol)
+        if self.transform_vol is not None:
+            vol = self.transform_vol(vol)
+
+        # mask loader
+        mask_name = self.mask_names[index]
+        mask = np.array(loadmat(mask_name)['mask_crop'], dtype=float)
+        mask = np.transpose(mask, [2, 0, 1])
+        mask = torch.from_numpy(mask).float()
+
+        if self.transform_mask is not None:
+            mask = self.transform_mask(mask)
 
         # class vector loader
         class_vec = self.class_vecs[index]
         class_vec = torch.FloatTensor(class_vec)
         
-        return vol, class_vec
+        return vol, mask, class_vec
 
     def __len__(self):
         return len(self.vol_names)
